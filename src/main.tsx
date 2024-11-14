@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
-
 function initializeExtension() {
   const targetSpan = document.querySelector("span.gb") as HTMLElement | null;
 
@@ -19,7 +18,6 @@ function initializeExtension() {
     }
 
     targetSpan.parentNode?.replaceChild(targetDiv, targetSpan);
-    console.log("Span element replaced with a div and made visible");
 
     const rootDiv = document.createElement("div");
     rootDiv.style.display = "flex";
