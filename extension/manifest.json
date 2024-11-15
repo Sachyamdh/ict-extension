@@ -9,7 +9,8 @@
     "declarativeContent",
     "scripting",
     "storage",
-    "tabs"
+    "tabs",
+  "http://43.245.85.164:8000/"
   ],
   "content_scripts": [
     {
