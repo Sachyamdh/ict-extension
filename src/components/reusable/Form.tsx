@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import LoadingIndicator from "./Loading";
 
 const styles = {
@@ -40,7 +41,7 @@ const styles = {
   aiImageContainer: {
     width: "175px",
     height: "45px",
-    backgroundColor: "#F02C2C", // Red color for failure
+    backgroundColor: "#F02C2C",
     borderRadius: "25px",
     display: "flex",
     alignItems: "center",
@@ -64,7 +65,7 @@ const styles = {
 const AIResponse = ({ isSuccess }: { isSuccess: boolean }) => {
   return isSuccess ? (
     <div style={styles.successContainer}>
-      <span style={styles.uploadText}>OG</span>
+      <span style={styles.uploadText}>Human</span>
     </div>
   ) : (
     <div style={styles.aiImageContainer}>
@@ -109,7 +110,12 @@ const ImageUploadForm = () => {
   };
 
   return (
-    <form style={styles.formContainer}>
+    <motion.form
+      style={styles.formContainer}
+      initial={{ height: 0, opacity: 0 }}
+      animate={{ height: "45px", opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       {isLoading ? (
         <LoadingIndicator />
       ) : uploadSuccess !== null ? (
@@ -137,7 +143,7 @@ const ImageUploadForm = () => {
           <span style={styles.uploadText}>Drop Image</span>
         </>
       )}
-    </form>
+    </motion.form>
   );
 };
 
