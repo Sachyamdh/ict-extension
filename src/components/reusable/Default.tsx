@@ -73,12 +73,15 @@ export const Default = () => {
         {form ? (
           <ImageUploadForm />
         ) : (
-          <div
+          <motion.div
             style={{
               width: "100%",
               display: "flex",
               gap: "5px",
             }}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "25px", opacity: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
             {isLoading ? (
               <div style={CheckAiButton}>
@@ -126,7 +129,7 @@ export const Default = () => {
                 />
               </svg>
             </Button>
-          </div>
+          </motion.div>
         )}
       </div>
     </motion.div>

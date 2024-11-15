@@ -5,7 +5,7 @@ import LoadingIndicator from "./Loading";
 const styles = {
   formContainer: {
     width: "175px",
-    height: "45px",
+    height: "35px",
     flexShrink: 0,
     borderRadius: "25px",
     border: "0.2px solid rgba(0, 0, 0, 0.35)",
@@ -40,7 +40,7 @@ const styles = {
   } as React.CSSProperties,
   aiImageContainer: {
     width: "175px",
-    height: "45px",
+    height: "35px",
     backgroundColor: "#F02C2C",
     borderRadius: "25px",
     display: "flex",
@@ -51,7 +51,7 @@ const styles = {
   } as React.CSSProperties,
   successContainer: {
     width: "175px",
-    height: "45px",
+    height: "35px",
     backgroundColor: "#26B924",
     borderRadius: "25px",
     display: "flex",
@@ -113,7 +113,7 @@ const ImageUploadForm = () => {
     <motion.form
       style={styles.formContainer}
       initial={{ height: 0, opacity: 0 }}
-      animate={{ height: "45px", opacity: 1 }}
+      animate={{ height: "35px", opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       {isLoading ? (
