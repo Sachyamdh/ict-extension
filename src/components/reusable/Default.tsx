@@ -63,6 +63,7 @@ export const Default = () => {
             textAlign: "center",
             fontSize: "8px",
           }}
+          onClick={() => setIsLoading(false)}
         >
           <h3 style={h3Styles} onClick={() => showForm(false)}>
             The Neural Sherpas
