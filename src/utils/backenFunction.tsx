@@ -1,6 +1,5 @@
 export const sendImageToBackend = async (imageUrl: string) => {
   try {
-    console.log(imageUrl)
     const response = await fetch("http://43.245.85.164:8000/upload-image", {
       method: "POST",
       headers: {

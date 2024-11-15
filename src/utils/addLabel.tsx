@@ -1,12 +1,12 @@
 export const Addlabel = (resultMap: Record<string, boolean>) => {
   const images = Array.from(document.querySelectorAll("div.wIjY0d img.YQ4gaf"))
     .filter((img) => img.classList.length === 1)
-    .slice(0, 20);
+    .slice(0, 30);
 
   images.forEach((img) => {
     const htmlImg = img as HTMLImageElement;
     const label = document.createElement("div");
-    label.textContent = resultMap[htmlImg.src] ? "OG" : "AI";
+    label.textContent = resultMap[htmlImg.src] ? "H" : "AI";
 
     // Label styles
     label.style.position = "absolute";
@@ -29,7 +29,6 @@ export const Addlabel = (resultMap: Record<string, boolean>) => {
     label.style.zIndex = "10";
     label.style.flexShrink = "0";
 
-    // Container styles
     const container = document.createElement("div");
     container.style.position = "relative";
     container.style.display = "inline-block";
@@ -44,14 +43,11 @@ export const Addlabel = (resultMap: Record<string, boolean>) => {
 };
 
 export const AddSingleLable = (result: boolean) => {
-  // Query all anchor elements with the class 'YsLeY'
-  console.log("label", result);
   const targetElements = document.querySelectorAll("a.YsLeY");
 
   const appendLabel = (targetElement: HTMLElement) => {
-    // Create the label div
     const label = document.createElement("div");
-    label.textContent = result ? "OG" : "AI";
+    label.textContent = result ? "H" : "AI";
 
     // Label styles
     label.style.position = "absolute";
@@ -81,10 +77,8 @@ export const AddSingleLable = (result: boolean) => {
 
   if (targetElements.length > 0) {
     targetElements.forEach((targetElement) => {
-      appendLabel(targetElement as HTMLElement); // Type cast here
+      appendLabel(targetElement as HTMLElement);
     });
-
-    console.log("Label appended to all anchor tags.");
   } else {
     console.log("No target elements with 'a.YsLeY' found.");
   }
@@ -96,11 +90,10 @@ export const AddSingleLable = (result: boolean) => {
     );
 
     newTargetElements.forEach((newTargetElement) => {
-      appendLabel(newTargetElement as HTMLElement); // Type cast here
-      newTargetElement.setAttribute("data-label-applied", "true"); // Mark label as applied
+      appendLabel(newTargetElement as HTMLElement);
+      newTargetElement.setAttribute("data-label-applied", "true");
     });
   });
 
-  // Start observing changes to the DOM
   observer.observe(document.body, { childList: true, subtree: true });
 };
