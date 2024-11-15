@@ -12,12 +12,16 @@ import { AddSingleLable, Addlabel } from "../../utils/addLabel";
 import { handleBulkImages, handleSingleImage } from "../../utils/handleCheckAI";
 import { Button } from "./Button";
 import ImageUploadForm from "./Form";
+import { motion } from "framer-motion";
+import LoadingIndicator from "./Loading";
 
 export const Default = () => {
   const [form, showForm] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCheckAI = async () => {
     const targeElement = document.querySelector("a.YsLeY");
+    setIsLoading(true);
     let result;
     if (!targeElement) {
       result = await handleBulkImages();
@@ -31,16 +35,23 @@ export const Default = () => {
       if (imageElement) {
         const imageUrl = imageElement.src;
         result = await handleSingleImage(imageUrl);
-        console.log("result", result);
+
         if (result !== undefined) AddSingleLable(result);
+        setIsLoading(false);
       } else {
         console.log("No image found inside the target <a> tag.");
+        setIsLoading(false);
       }
     }
   };
 
   return (
-    <div style={DefaultContainer}>
+    <motion.div
+      style={DefaultContainer}
+      initial={{ opacity: 0, x: 50 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div style={triangleTopLeft}></div>
       <div style={triangleBottomRight}></div>
       <div style={defaultContainerContent}>
@@ -69,23 +80,34 @@ export const Default = () => {
               gap: "5px",
             }}
           >
-            <Button type="button" onClick={handleCheckAI} style={CheckAiButton}>
-              <img
-                src="https://s3-alpha-sig.figma.com/img/c0ec/8b30/4b9543caf8856f637be3c117a9bf0291?Expires=1732492800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=dh6TSG22M3HnNW~zUCDSghVbt8T6qsPUuhCAK1FHC3tHMg4mZ8ilxj3UuZIoscmPa4SzhuW-ZSzlO9LB6VHhXNiUe5BIBafNxWyvmU1mgnnSmNml2ScGgkRSJPaLPB0dve-TN6PN6luV466ZRVq0oov28p-mCLEksaFcpWVGtqpfT5q~8lT3oGknKxsgGgvtwsNwbwpKJ32urkWJ5Vv~ol26NJsMUBqexer-BwrtpAbTS291UNZinx6oHgrjRBnTXuHgLq3N1Vz83D5OmNusGwRsv9o6iCPxz6UUKS5rbNX8MXXmRgQpvqfEPq9SkBtSEPqdJKnSHCrEYQXt-eWXsg__"
-                alt="Logo"
-                style={{ width: "25px", height: "25px", objectFit: "fill" }}
-              />
-              <span
-                style={{
-                  fontSize: "13px",
-                  fontStyle: "normal",
-                  fontWeight: 600,
-                  lineHeight: "normal",
-                }}
+            {isLoading ? (
+              <div style={CheckAiButton}>
+                <LoadingIndicator />
+              </div>
+            ) : (
+              <Button
+                type="button"
+                onClick={handleCheckAI}
+                style={CheckAiButton}
               >
-                Check for AI
-              </span>
-            </Button>
+                <img
+                  src="https://s3-alpha-sig.figma.com/img/c0ec/8b30/4b9543caf8856f637be3c117a9bf0291?Expires=1732492800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=dh6TSG22M3HnNW~zUCDSghVbt8T6qsPUuhCAK1FHC3tHMg4mZ8ilxj3UuZIoscmPa4SzhuW-ZSzlO9LB6VHhXNiUe5BIBafNxWyvmU1mgnnSmNml2ScGgkRSJPaLPB0dve-TN6PN6luV466ZRVq0oov28p-mCLEksaFcpWVGtqpfT5q~8lT3oGknKxsgGgvtwsNwbwpKJ32urkWJ5Vv~ol26NJsMUBqexer-BwrtpAbTS291UNZinx6oHgrjRBnTXuHgLq3N1Vz83D5OmNusGwRsv9o6iCPxz6UUKS5rbNX8MXXmRgQpvqfEPq9SkBtSEPqdJKnSHCrEYQXt-eWXsg__"
+                  alt="Logo"
+                  style={{ width: "25px", height: "25px", objectFit: "fill" }}
+                />
+                <span
+                  style={{
+                    fontSize: "13px",
+                    fontStyle: "normal",
+                    fontWeight: 600,
+                    lineHeight: "normal",
+                  }}
+                >
+                  Check for AI
+                </span>
+              </Button>
+            )}
+
             <Button
               type="button"
               onClick={() => showForm(true)}
@@ -107,6 +129,6 @@ export const Default = () => {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };

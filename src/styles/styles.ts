@@ -15,6 +15,7 @@ export const containerStyle: React.CSSProperties = {
   fontStyle: "normal",
   fontWeight: 400,
   lineHeight: "normal",
+  cursor: "pointer",
 };
 export const h3Styles: React.CSSProperties = {
   fontFamily: "Lato",

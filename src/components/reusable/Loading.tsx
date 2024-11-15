@@ -13,7 +13,7 @@ const LoadingIndicator: React.FC = () => {
           display: "inline-block",
         }}
         animate={{ rotate: 360 }}
-        transition={{ duration: 1, repeat: Infinity }}
+        transition={{ duration: 1.2, repeat: Infinity }}
       />
       <motion.span
         style={{
